@@ -84,7 +84,8 @@ Este proyecto implementa un servidor HTTP en Java que maneja solicitudes de arch
 
 
 ### Diagrama de Componentes
-   +------------------+
+
++------------------+
 |    HttpServer    |
 +------------------+
          |
