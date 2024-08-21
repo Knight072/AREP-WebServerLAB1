@@ -82,6 +82,35 @@ Este proyecto implementa un servidor HTTP en Java que maneja solicitudes de arch
 - **`target/classes/`**: Archivos compilados y archivos estáticos (HTML, CSS, JS, imágenes).
 
 
+## Pruebas
+
+### Pruebas Unitarias
+
+Las pruebas unitarias se han implementado utilizando JUnit Jupiter. Estas pruebas verifican la funcionalidad de los componentes clave del servidor, asegurando que cada parte del sistema funcione correctamente de forma aislada. A continuación se presentan algunos ejemplos de pruebas implementadas:
+
+#### Prueba de Creación de Usuario
+
+- **Descripción:** Verifica que un usuario pueda ser creado correctamente mediante una solicitud POST.
+- **Clase de Prueba:** `UsuarioHandlerTest`
+- **Método de Prueba:**
+  ```java
+  @Test
+  public void testCrearUsuario() throws IOException {
+      // Crear un nuevo usuario
+      String jsonInput = "{\"nombre\":\"Carlos\",\"edad\":22,\"email\":\"carlos@example.com\"}";
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(jsonInput.getBytes());
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      
+      // Llamar al método que maneja la creación de usuario
+      UsuarioHandler.crearUsuario(outputStream, new BufferedReader(new InputStreamReader(inputStream)));
+      
+      // Verificar la respuesta
+      String response = outputStream.toString();
+      assertTrue(response.contains("\"nombre\":\"Carlos\""));
+      assertTrue(response.contains("\"edad\":22"));
+      assertTrue(response.contains("\"email\":\"carlos@example.com\""));
+  }
+
 
 ### Diagrama de Componentes
 
