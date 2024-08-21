@@ -89,32 +89,37 @@ Este proyecto implementa un servidor HTTP en Java que maneja solicitudes de arch
 
 ## Pruebas
 
+### Pruebas de Archivos
+
+Para probar que el servidor este sirviendo archivos estáticos como .png, .html, .txt, se va a modificar la url con el nombre del archivo junto con su extensión que se quiere buscar, ejemplo:
+
+ `http://localhost:8080/google.png`
+ `http://localhost:8080/test.txt`
+ `http://localhost:8080/index.html`
+ `http://localhost:8080/script.js`
+ `http://localhost:8080/styles.css`
+
+También, hay un campo en el formulario de la clase principal donde se escribe el nombre del archivo y se devuelve, las imágenes retornan como texto en binario por el momento.
+
 ### Pruebas Unitarias
 
 Las pruebas unitarias se han implementado utilizando JUnit Jupiter. Estas pruebas verifican la funcionalidad de los componentes clave del servidor, asegurando que cada parte del sistema funcione correctamente de forma aislada. A continuación se presentan algunos ejemplos de pruebas implementadas:
 
-#### Prueba de Creación de Usuario
+#### Prueba de Devolución de Usuarios
 
-- **Descripción:** Verifica que un usuario pueda ser creado correctamente mediante una solicitud POST.
+- **Descripción:** Devuelve los usuarios que han sido creados mediante una solicitud GET.
 - **Clase de Prueba:** `UsuarioHandlerTest`
 - **Método de Prueba:**
   ```java
   @Test
-  public void testCrearUsuario() throws IOException {
-      // Crear un nuevo usuario
-      String jsonInput = "{\"nombre\":\"Carlos\",\"edad\":22,\"email\":\"carlos@example.com\"}";
-      ByteArrayInputStream inputStream = new ByteArrayInputStream(jsonInput.getBytes());
-      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-      
-      // Llamar al método que maneja la creación de usuario
-      UsuarioHandler.crearUsuario(outputStream, new BufferedReader(new InputStreamReader(inputStream)));
-      
-      // Verificar la respuesta
-      String response = outputStream.toString();
-      assertTrue(response.contains("\"nombre\":\"Carlos\""));
-      assertTrue(response.contains("\"edad\":22"));
-      assertTrue(response.contains("\"email\":\"carlos@example.com\""));
-  }
+    public void testMostrarUsuarios() throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        UsuarioHandler.mostrarUsuarios(out);
+
+        String response = out.toString("UTF-8");
+        assertTrue(response.contains("\"status\":\"success\""));
+        assertTrue(response.contains("\"usuarios\":"));
+    }
 
 
 ### Diagrama de Componentes
