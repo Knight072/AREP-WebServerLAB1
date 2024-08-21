@@ -31,6 +31,11 @@ Este proyecto implementa un servidor HTTP en Java que maneja solicitudes de arch
    ```bash
    java -cp target/classes edu.escuelaing.arep.HttpServer
    ```
+4. **Ejecutar las Pruebas**
+
+   ```bash
+   mvn test
+   ```
 
 ## Arquitectura
 
